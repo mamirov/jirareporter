@@ -9,6 +9,8 @@
                            http://www.springframework.org/schema/lang/spring-lang-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
        default-autowire="constructor">
 
-  <bean id="jirareporterAgentListener" class="jirareporter.agent.AgentListener"/>
+  <bean id="jiraReporterBuildService" class="com.amirov.jirareporter.JiraReporterBuildService"/>
+  <bean id="jiraReporterBuildServiceFactory" class="com.amirov.jirareporter.JiraReporterBuildServiceFactory"/>
+  <bean id="runnerParamsProvider" class="com.amirov.jirareporter.RunnerParamsProvider"/>
 
 </beans>

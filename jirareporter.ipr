@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AntConfiguration">
-    <defaultAnt bundledAnt="true" />
     <buildFile url="file://$PROJECT_DIR$/build.xml">
-      <additionalClassPath />
-      <antReference projectDefault="true" />
-      <customJdkName value="" />
       <maximumHeapSize value="176" />
       <maximumStackSize value="32" />
-      <properties />
     </buildFile>
   </component>
   <component name="ArtifactManager">
@@ -299,26 +294,10 @@
   <component name="ProjectCodeStyleSettingsManager">
     <option name="PER_PROJECT_SETTINGS">
       <value>
-        <option name="OTHER_INDENT_OPTIONS">
-          <value>
-            <option name="INDENT_SIZE" value="2" />
-            <option name="CONTINUATION_INDENT_SIZE" value="8" />
-            <option name="TAB_SIZE" value="2" />
-            <option name="USE_TAB_CHARACTER" value="false" />
-            <option name="SMART_TABS" value="false" />
-            <option name="LABEL_INDENT_SIZE" value="0" />
-            <option name="LABEL_INDENT_ABSOLUTE" value="false" />
-            <option name="USE_RELATIVE_INDENTS" value="false" />
-          </value>
-        </option>
         <XML>
           <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
         </XML>
         <codeStyleSettings language="JAVA">
-          <indentOptions>
-            <option name="INDENT_SIZE" value="2" />
-            <option name="TAB_SIZE" value="2" />
-          </indentOptions>
           <arrangement>
             <groups>
               <group>
@@ -535,18 +514,17 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/root.iml" filepath="$PROJECT_DIR$/root.iml" />
       <module fileurl="file://$PROJECT_DIR$/agent/jirareporter-agent.iml" filepath="$PROJECT_DIR$/agent/jirareporter-agent.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/jirareporter-common.iml" filepath="$PROJECT_DIR$/common/jirareporter-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/server/jirareporter-server.iml" filepath="$PROJECT_DIR$/server/jirareporter-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/root.iml" filepath="$PROJECT_DIR$/root.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ProjectRunConfigurationManager">
     <configuration default="false" name="Run TeamCity server with plugin" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat (TeamCity Dist)" show_console_on_std_out="true" show_console_on_std_err="true">
-      <option name="OPEN_IN_BROWSER" value="false" />
       <option name="COMMON_VM_ARGUMENTS" value="-Xmx512m -XX:MaxPermSize=270m -XX:+HeapDumpOnOutOfMemoryError  -Dlog4j.configuration=file:%IDEA_RUN:TOMCAT_HOME%/conf/teamcity-server-log4j.xml -Dteamcity_logs=%IDEA_RUN:TOMCAT_HOME%/logs/ -DTC.res.disableAll=true -Dteamcity.development.shadowCopyClasses=true" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment />
@@ -646,9 +624,18 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
+    <library name="lib">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/lib" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" />
+    </library>
     <library name="TeamCity Open API agent">
       <CLASSES>
         <root url="jar://$TeamCityDistribution$/devPackage/agent-api.jar!/" />
