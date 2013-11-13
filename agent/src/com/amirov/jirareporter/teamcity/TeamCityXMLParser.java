@@ -1,8 +1,7 @@
 package com.amirov.jirareporter.teamcity;
 
 
-import com.amirov.jirareporter.Reporter;
-import com.amirov.jirareporter.RunnerParamsProvider;
+import com.amirov.jirareporter.JiraReporterBuildService;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -20,15 +19,15 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class TeamCityXMLParser {
-    private static String SERVER_URL = RunnerParamsProvider.getTCServerURL();
-    private static String BUILDS_XML_URL = "/httpAuth/app/rest/builds?locator=running:true,buildType:"+ Reporter.getBuildType();
+    private static String SERVER_URL = "http://localhost:8111";
+    private static String BUILDS_XML_URL = "/httpAuth/app/rest/builds?locator=running:true,buildType:"+ JiraReporterBuildService.getBuildTypeId();
     private static NamedNodeMap buildData = parseXML(SERVER_URL + BUILDS_XML_URL, "build");
     private static String userPassword;
 
     private static Node getNode(String xmlUrl, String tag, int num) {
         try{
             URL url = new URL(xmlUrl);
-            userPassword = TeamCityConfig.getBasicAuth();
+            userPassword = "admin:admin";
             validateTeamCityData();
             String encoding = new BASE64Encoder().encode(userPassword.getBytes());
             URLConnection uc = url.openConnection();
@@ -59,7 +58,7 @@ public class TeamCityXMLParser {
             return getNode(xmlUrl, tag, 0).getAttributes();
         }
         catch (NullPointerException e){
-            System.out.println("Cannot find running builds for "+Reporter.getBuildType());
+            System.out.println("Cannot find running builds for "+JiraReporterBuildService.getBuildTypeId());
             System.exit(0);
         }
         return null;

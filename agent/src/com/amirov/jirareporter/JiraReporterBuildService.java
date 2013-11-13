@@ -12,11 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 public class JiraReporterBuildService extends BuildServiceAdapter{
+    private static Map<String, String> runnerParams;
+    private static String buildTypeId;
+
     @NotNull
     @Override
     public ProgramCommandLine makeProgramCommandLine() throws RunBuildException {
         List<String> arguments = new ArrayList<String>();
-        Map<String, String> runnerParams = new HashMap<String, String>(getRunnerParameters());
+        runnerParams = new HashMap<String, String>(getRunnerParameters());
+        buildTypeId = getBuild().getBuildTypeId();
         Map<String, String> env = new HashMap<String, String>();
         Reporter.report();
         Reporter.progressIssue();
@@ -29,5 +33,13 @@ public class JiraReporterBuildService extends BuildServiceAdapter{
             return new SimpleProgramCommandLine(env, getWorkingDirectory().getAbsolutePath(), "C:\\Windows\\System32\\whoami.exe", arguments);
         }
         return new SimpleProgramCommandLine(env, getWorkingDirectory().getAbsolutePath(), "", arguments);
+    }
+
+    public static Map<String, String> getRunnerParams(){
+        return runnerParams;
+    }
+
+    public static String getBuildTypeId(){
+        return buildTypeId;
     }
 }

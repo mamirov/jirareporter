@@ -36,6 +36,7 @@
                 <element id="archive" name="jirareporter-agent.jar">
                   <element id="module-output" name="jirareporter-agent" />
                 </element>
+                <element id="library" level="project" name="lib" />
               </element>
             </element>
           </element>

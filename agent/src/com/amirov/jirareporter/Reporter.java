@@ -11,27 +11,20 @@ public class Reporter {
 
     private static String issueId;
 
-    private static RunnerParamsProvider params;
+    private static RunnerParamsProvider params = new RunnerParamsProvider();
 
     public static String getBuildType(){
-        return params.getBuildType();
+        return JiraReporterBuildService.getBuildTypeId();
     }
 
     public static String getIssueId(){
-        String issueIdPlace = JIRAConfig.getIssuePlace();
-        if(issueIdPlace == null || issueIdPlace.isEmpty()){
-            System.out.println("Enter place for getting issue id in jira.properties\nExample: 'cmd', 'teamcity', 'custom'");
-            System.exit(0);
-        }
+        String issueIdPlace = params.getIssueIdPlace();
         switch (issueIdPlace){
-            case "cmd":
-//                issueId = params.getIssueId();
-                break;
             case "teamcity":
                 issueId = TeamCityXMLParser.getIssue();
                 break;
             case "custom":
-                issueId = JIRAConfig.getIssueId();
+                issueId = params.getIssueId();
                 break;
         }
         issueIdAlert();
@@ -48,7 +41,7 @@ public class Reporter {
 
     public static void progressIssue(){
         NullProgressMonitor pm = new NullProgressMonitor();
-        if(JIRAConfig.issueProgressingIsEnable() || params.progressIssueIsEnable()){
+        if(params.progressIssueIsEnable()){
             String teamCityBuildStatus = TeamCityXMLParser.getStatusBuild();
             getRestClient().getIssueClient().transition(getIssue().getTransitionsUri(), getTransitionInput(JIRAConfig.prepareJiraWorkflow(teamCityBuildStatus).get(getIssueStatus())), pm);
         }
