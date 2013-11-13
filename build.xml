@@ -1,0 +1,44 @@
+<project name="jirareporter-custom-build" default="dist" basedir=".">
+
+  <property file="build.properties"/>
+  <property name="plugin.name" value="jirareporter"/>
+  <property name="javac2.home" value="${basedir}/lib-compile"/>
+
+  <import file="teamcity-common.xml"/>
+  <import file="jirareporter.xml"/>
+
+  <target name="package" depends="define.version">
+    <package.teamcity.plugin name="${plugin.name}"
+                             common.output="${jirareporter-common.output.dir}"
+                             server.output="${jirareporter-server.output.dir}"
+                             agent.output="${jirareporter-agent.output.dir}"
+                             server.lib.dir="lib" server.lib.includes="*.jar"
+                             plugin.descriptor.file="${basedir}/teamcity-plugin.xml"
+                             plugin.version="${plugin.version}"/>
+  </target>
+
+  <target name="define.version" depends="define.version.if.under.teamcity">
+    <tstamp>
+      <format property="current.time" pattern="yyyyMMddHHmm"/>
+    </tstamp>
+    <property name="plugin.version" value="SNAPSHOT-${current.time}"/>
+  </target>
+
+  <target name="define.version.if.under.teamcity" if="build.number">
+    <property name="plugin.version" value="${build.number}"/>
+  </target>
+
+  <target name="dist" depends="check.teamcitydistribution,build.modules,package"/>
+
+  <target name="clean" depends="jirareporter.clean"/>
+
+  <target name="deploy" depends="dist">
+    <deploy.teamcity.plugin name="${plugin.name}"/>
+  </target>
+
+  <target name="prepare.plugin.descriptor.file.artifacts" depends="define.version, prepare.plugin.descriptor.file.do"/>
+
+  <target name="deploy.artifact.plugin">
+    <deploy.teamcity.plugin name="${plugin.name}" teamcity.data.path="${path.variable.teamcitydistribution}" out="out/artifacts/final_plugin_package"/>
+  </target>
+</project>
