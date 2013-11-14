@@ -40,6 +40,18 @@ public class RunnerParamsProvider {
         return buildRunnerContext.get("jiraWorkflow");
     }
 
+    public String getTCServerUrl(){
+        return buildRunnerContext.get("tcServerUrl");
+    }
+
+    public String getTCUser(){
+        return buildRunnerContext.get("tcUser");
+    }
+
+    public String getTCPassword(){
+        return buildRunnerContext.get("tcPassword");
+    }
+
     public boolean progressIssueIsEnable(){
         return Boolean.parseBoolean(buildRunnerContext.get("enableIssueProgressing"));
     }

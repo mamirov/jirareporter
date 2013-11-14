@@ -50,7 +50,21 @@
     </tr>
 </l:settingsGroup>
 <l:settingsGroup title="TeamCity Configuration">
-
+    <tr>
+        <td>
+            <span>Server URL:</span>
+            <br>
+            <props:textProperty name="tcServerUrl" id="tcServerUrl" className="longField"/>
+            <br>
+            <span>User:</span>
+            <br>
+            <props:textProperty name="tcUser" id="tcUser"/>
+            <br>
+            <span>Password:</span>
+            <br>
+            <props:passwordProperty name="tcPassword"/>
+        </td>
+    </tr>
 </l:settingsGroup>
 
 <script type="text/javascript">

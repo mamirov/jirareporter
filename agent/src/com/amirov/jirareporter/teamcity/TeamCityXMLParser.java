@@ -1,7 +1,7 @@
 package com.amirov.jirareporter.teamcity;
 
 
-import com.amirov.jirareporter.JiraReporterBuildService;
+import com.amirov.jirareporter.RunnerParamsProvider;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -19,15 +19,22 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class TeamCityXMLParser {
-    private static String SERVER_URL = "http://localhost:8111";
-    private static String BUILDS_XML_URL = "/httpAuth/app/rest/builds?locator=running:true,buildType:"+ JiraReporterBuildService.getBuildTypeId();
+    private static RunnerParamsProvider params = new RunnerParamsProvider();
+    private static String SERVER_URL;
+    private static String BUILD_TYPE;
+    private static String BUILDS_XML_URL = "/httpAuth/app/rest/builds?locator=running:true,buildType:"+ BUILD_TYPE;
     private static NamedNodeMap buildData = parseXML(SERVER_URL + BUILDS_XML_URL, "build");
     private static String userPassword;
+
+    public static void prepareTCConfiguration(String serverUrl, String user, String password, String buildType){
+        SERVER_URL = serverUrl;
+        BUILD_TYPE = buildType;
+        userPassword = user +":"+password;
+    }
 
     private static Node getNode(String xmlUrl, String tag, int num) {
         try{
             URL url = new URL(xmlUrl);
-            userPassword = "admin:admin";
             validateTeamCityData();
             String encoding = new BASE64Encoder().encode(userPassword.getBytes());
             URLConnection uc = url.openConnection();
@@ -58,8 +65,7 @@ public class TeamCityXMLParser {
             return getNode(xmlUrl, tag, 0).getAttributes();
         }
         catch (NullPointerException e){
-            System.out.println("Cannot find running builds for "+JiraReporterBuildService.getBuildTypeId());
-            System.exit(0);
+            System.out.println("Cannot find running builds for " + BUILD_TYPE);
         }
         return null;
     }
@@ -75,7 +81,6 @@ public class TeamCityXMLParser {
         }
         catch (NullPointerException e){
             System.out.println("Issue is not related");
-            System.exit(0);
         }
         return "";
     }
@@ -123,5 +128,9 @@ public class TeamCityXMLParser {
         if(userPassword.isEmpty() || userPassword == null){
             System.out.println("Enter user and password in teamcity.properties");
         }
+    }
+
+    public static String getTestResultText(){
+        return getStatusBuild()+"\nBuild Finished\nResults:\n ["+ BUILD_TYPE+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+BUILD_TYPE+"]";
     }
 }
