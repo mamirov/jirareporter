@@ -25,10 +25,4 @@ public class Reporter {
             getRestClient().getIssueClient().transition(getIssue().getTransitionsUri(), getTransitionInput(JIRAConfig.prepareJiraWorkflow(teamCityBuildStatus).get(getIssueStatus())), pm);
         }
     }
-
-    private static void issueIdAlert(){
-        if(RunnerParamsProvider.getIssueId() == null || RunnerParamsProvider.getIssueId().isEmpty()){
-            System.out.println("Issue id is empty");
-        }
-    }
 }

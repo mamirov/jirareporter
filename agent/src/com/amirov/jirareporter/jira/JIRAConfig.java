@@ -3,10 +3,8 @@ package com.amirov.jirareporter.jira;
 
 import com.amirov.jirareporter.RunnerParamsProvider;
 
-import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 public class JIRAConfig {
 
@@ -25,10 +23,9 @@ public class JIRAConfig {
     }
 
     public static Map<String, String> prepareJiraWorkflow(String buildStatus){
-        RunnerParamsProvider params = new RunnerParamsProvider();
         Map<String, String> successWorkflowMap = new HashMap<>();
         Map<String, String> failureWorkflowMap = new HashMap<>();
-        String [] statusCont = params.getJiraWorkFlow().split(";");
+        String [] statusCont = RunnerParamsProvider.getJiraWorkFlow().split(";");
         for(String status : statusCont){
             processWorkflow("SUCCESS", status, successWorkflowMap);
             processWorkflow("FAILURE", status, failureWorkflowMap);
