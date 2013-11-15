@@ -15,30 +15,26 @@ import java.net.URISyntaxException;
 
 public class JIRAClient {
 
-    private static RunnerParamsProvider params = new RunnerParamsProvider();
-    private static String issueIdJira;
-
     public static JiraRestClient getRestClient() {
-        System.setProperty("jsse.enableSNIExtension", params.sslConnectionIsEnabled());
+        System.setProperty("jsse.enableSNIExtension", RunnerParamsProvider.sslConnectionIsEnabled());
         JerseyJiraRestClientFactory factory = new JerseyJiraRestClientFactory();
         URI jiraServerUri = null;
         try {
-            jiraServerUri = new URI(params.getJiraServerUrl());
+            jiraServerUri = new URI(RunnerParamsProvider.getJiraServerUrl());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        return factory.createWithBasicHttpAuthentication(jiraServerUri, params.getJiraUser(), params.getJiraPassword());
+        return factory.createWithBasicHttpAuthentication(jiraServerUri, RunnerParamsProvider.getJiraUser(), RunnerParamsProvider.getJiraPassword());
     }
 
-    public static Issue getIssue(String issueId) {
+    public static Issue getIssue() {
         NullProgressMonitor pm = new NullProgressMonitor();
         Issue issue = null;
         try {
-            if(issueId.isEmpty()){
+            if(RunnerParamsProvider.getIssueId().isEmpty()){
                 System.out.println("Issue id is empty");
             }
-            issueIdJira = issueId;
-            issue = getRestClient().getIssueClient().getIssue(issueId, pm);
+            issue = getRestClient().getIssueClient().getIssue(RunnerParamsProvider.getIssueId(), pm);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,11 +42,11 @@ public class JIRAClient {
     }
 
     public static String getIssueStatus(){
-        return getIssue(issueIdJira).getStatus().getName();
+        return getIssue().getStatus().getName();
     }
 
     private static Iterable<Transition> getTransitions (){
-        return getRestClient().getIssueClient().getTransitions(getIssue(issueIdJira).getTransitionsUri(), new NullProgressMonitor());
+        return getRestClient().getIssueClient().getTransitions(getIssue().getTransitionsUri(), new NullProgressMonitor());
     }
 
     private static Transition getTransition(String transitionName){

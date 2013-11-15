@@ -11,6 +11,5 @@
 
   <bean id="jiraReporterBuildService" class="com.amirov.jirareporter.JiraReporterBuildService"/>
   <bean id="jiraReporterBuildServiceFactory" class="com.amirov.jirareporter.JiraReporterBuildServiceFactory"/>
-  <bean id="runnerParamsProvider" class="com.amirov.jirareporter.RunnerParamsProvider"/>
 
 </beans>

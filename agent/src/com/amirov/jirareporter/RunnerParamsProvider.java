@@ -2,25 +2,47 @@ package com.amirov.jirareporter;
 
 
 
-import java.util.Map;
+import com.amirov.jirareporter.teamcity.TeamCityXMLParser;
 
-public class RunnerParamsProvider {
-    private Map<String, String> buildRunnerContext = JiraReporterBuildService.getRunnerParams();
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Properties;
 
-    public String getJiraServerUrl(){
-        return buildRunnerContext.get("jiraServerUrl");
+public  class RunnerParamsProvider {
+    public  static Properties props = new Properties();
+    static {
+        try {
+            FileInputStream fis = new FileInputStream("params.properties");
+            props.load(fis);
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public String getJiraUser(){
-        return buildRunnerContext.get("jiraUser");
+    public static void setProperty(String key, String value){
+        try{
+            props.setProperty(key, value);
+            props.store(new FileOutputStream("params.properties"), "set parameters");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public String getJiraPassword(){
-        return buildRunnerContext.get("jiraPassword");
+    public static String getJiraServerUrl(){
+        return props.getProperty("jiraServerUrl");
     }
 
-    public String sslConnectionIsEnabled(){
-        if(buildRunnerContext.get("enableSSLConnection").equals("true")){
+    public static String getJiraUser(){
+        return props.getProperty("jiraUser");
+    }
+
+    public static String getJiraPassword(){
+        return props.getProperty("jiraPassword");
+    }
+
+    public static String sslConnectionIsEnabled(){
+        if(props.getProperty("enableSSLConnection").equals("true")){
             return "false";
         }
         else {
@@ -28,31 +50,45 @@ public class RunnerParamsProvider {
         }
     }
 
-    public String getIssueIdPlace(){
-        return buildRunnerContext.get("issueIdPlace");
+    public static String getBuildTypeId(){
+        return props.getProperty("teamcity.buildType.id");
     }
 
-    public String getIssueId(){
-        return buildRunnerContext.get("issueId");
+    public static String getIssueIdPlace(){
+        return props.getProperty("issueIdPlace");
     }
 
-    public String getJiraWorkFlow(){
-        return buildRunnerContext.get("jiraWorkflow");
+    public static String getIssueId(){
+        String issueId = "";
+        switch (getIssueIdPlace()){
+            case "teamcity":
+                String issueTC = TeamCityXMLParser.getIssue();
+                setProperty("issueId", issueTC);
+                issueId = issueTC;
+                break;
+            case "custom":
+                issueId = props.getProperty("issueId");
+        }
+        return issueId;
     }
 
-    public String getTCServerUrl(){
-        return buildRunnerContext.get("tcServerUrl");
+    public static String getJiraWorkFlow(){
+        return props.getProperty("jiraWorkflow");
     }
 
-    public String getTCUser(){
-        return buildRunnerContext.get("tcUser");
+    public static String getTCServerUrl(){
+        return props.getProperty("tcServerUrl");
     }
 
-    public String getTCPassword(){
-        return buildRunnerContext.get("tcPassword");
+    public static String getTCUser(){
+        return props.getProperty("tcUser");
     }
 
-    public boolean progressIssueIsEnable(){
-        return Boolean.parseBoolean(buildRunnerContext.get("enableIssueProgressing"));
+    public static String getTCPassword(){
+        return props.getProperty("tcPassword");
+    }
+
+    public static boolean progressIssueIsEnable(){
+        return Boolean.parseBoolean(props.getProperty("enableIssueProgressing"));
     }
 }

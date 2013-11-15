@@ -7,30 +7,18 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 import sun.misc.BASE64Encoder;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
 public class TeamCityXMLParser {
-    private static RunnerParamsProvider params = new RunnerParamsProvider();
-    private static String SERVER_URL;
-    private static String BUILD_TYPE;
+    private static String SERVER_URL = RunnerParamsProvider.getTCServerUrl();
+    private static String BUILD_TYPE = RunnerParamsProvider.getBuildTypeId();
     private static String BUILDS_XML_URL = "/httpAuth/app/rest/builds?locator=running:true,buildType:"+ BUILD_TYPE;
-    private static NamedNodeMap buildData = parseXML(SERVER_URL + BUILDS_XML_URL, "build");
-    private static String userPassword;
-
-    public static void prepareTCConfiguration(String serverUrl, String user, String password, String buildType){
-        SERVER_URL = serverUrl;
-        BUILD_TYPE = buildType;
-        userPassword = user +":"+password;
-    }
+    private static String userPassword = RunnerParamsProvider.getTCUser()+":"+ RunnerParamsProvider.getTCPassword();
 
     private static Node getNode(String xmlUrl, String tag, int num) {
         try{
@@ -46,32 +34,22 @@ public class TeamCityXMLParser {
             doc.getDocumentElement().normalize();
             NodeList nodeList = doc.getElementsByTagName(tag);
             return nodeList.item(num);
-        } catch (MalformedURLException e) {
-            System.out.println("Enter valid url, example : http://teamcity.example.com");
-            e.printStackTrace();
-        } catch (IOException e) {
-            if(e.getLocalizedMessage().contains("401")){
-                System.out.println("Wrong user or password, check property 'teamcity.basic.auth.user.password' in teamcity.properties");
-            }
-            e.printStackTrace();
-        } catch (ParserConfigurationException | SAXException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private static NamedNodeMap getBuildData(){
+        return parseXML(SERVER_URL+BUILDS_XML_URL, "build");
     }
 
     private static NamedNodeMap parseXML(String xmlUrl, String tag){
-        try {
-            return getNode(xmlUrl, tag, 0).getAttributes();
-        }
-        catch (NullPointerException e){
-            System.out.println("Cannot find running builds for " + BUILD_TYPE);
-        }
-        return null;
+        return getNode(xmlUrl, tag, 0).getAttributes();
     }
 
     private static String getBuildAttribute(String attribute){
-        return buildData.getNamedItem(attribute).getNodeValue();
+        return getBuildData().getNamedItem(attribute).getNodeValue();
     }
 
     public static String getIssue(){
