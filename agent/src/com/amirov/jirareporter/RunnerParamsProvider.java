@@ -88,7 +88,11 @@ public  class RunnerParamsProvider {
         return props.getProperty("tcPassword");
     }
 
-    public static boolean progressIssueIsEnable(){
-        return Boolean.parseBoolean(props.getProperty("enableIssueProgressing"));
+    public static String progressIssueIsEnable(){
+        return props.getProperty("enableIssueProgressing");
+    }
+
+    public static String getBuildTypeName(){
+        return props.getProperty("buildName");
     }
 }

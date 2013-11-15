@@ -109,6 +109,6 @@ public class TeamCityXMLParser {
     }
 
     public static String getTestResultText(){
-        return getStatusBuild()+"\nBuild Finished\nResults:\n ["+ BUILD_TYPE+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+BUILD_TYPE+"]";
+        return getStatusBuild()+"\nBuild Finished\nResults:\n ["+RunnerParamsProvider.getBuildTypeName()+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+BUILD_TYPE+"]";
     }
 }

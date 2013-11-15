@@ -21,16 +21,13 @@ public class JiraReporterBuildService extends BuildServiceAdapter{
         for(Map.Entry<String, String> entry : new HashMap<>(getRunnerParameters()).entrySet()){
             RunnerParamsProvider.setProperty(entry.getKey(), entry.getValue());
         }
-        if(RunnerParamsProvider.getIssueIdPlace().equals("teamcity")){
-            if(RunnerParamsProvider.getIssueId().isEmpty() || RunnerParamsProvider.getIssueId() == null){
-                System.out.println("issue id is empty");
-            }
-        }
-        else if(RunnerParamsProvider.getIssueId().isEmpty() || RunnerParamsProvider.getIssueId() == null){
+        RunnerParamsProvider.setProperty("buildName", getBuild().getBuildTypeName());
+        if(RunnerParamsProvider.getIssueId().isEmpty() || RunnerParamsProvider.getIssueId() == null){
             System.out.println("issue id is empty");
         }
         else {
             Reporter.report();
+            Reporter.progressIssue();
         }
         String osName = System.getProperty("os.name");
         if(osName.contains("Mac") || osName.contains("nix") || osName.contains("nux")){

@@ -31,9 +31,6 @@ public class JIRAClient {
         NullProgressMonitor pm = new NullProgressMonitor();
         Issue issue = null;
         try {
-            if(RunnerParamsProvider.getIssueId().isEmpty()){
-                System.out.println("Issue id is empty");
-            }
             issue = getRestClient().getIssueClient().getIssue(RunnerParamsProvider.getIssueId(), pm);
         } catch (Exception e) {
             e.printStackTrace();

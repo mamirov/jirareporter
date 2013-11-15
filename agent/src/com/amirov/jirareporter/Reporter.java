@@ -19,7 +19,8 @@ public class Reporter {
 
     public static void progressIssue(){
         NullProgressMonitor pm = new NullProgressMonitor();
-        if(RunnerParamsProvider.progressIssueIsEnable()){
+        if(RunnerParamsProvider.progressIssueIsEnable() == null){}
+        else if(RunnerParamsProvider.progressIssueIsEnable().equals("true")){
             String teamCityBuildStatus = TeamCityXMLParser.getStatusBuild();
             getRestClient().getIssueClient().transition(getIssue().getTransitionsUri(), getTransitionInput(JIRAConfig.prepareJiraWorkflow(teamCityBuildStatus).get(getIssueStatus())), pm);
         }
