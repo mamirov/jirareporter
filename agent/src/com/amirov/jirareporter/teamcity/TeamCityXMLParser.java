@@ -100,11 +100,11 @@ public class TeamCityXMLParser {
     }
 
     private static void validateTeamCityData(){
-        if(SERVER_URL.isEmpty() || SERVER_URL == null){
-            System.out.println("Enter teamcity server url in teamcity.properties");
+        if(SERVER_URL.isEmpty()){
+            System.out.println("TeamCity server url is empty");
         }
-        if(userPassword.isEmpty() || userPassword == null){
-            System.out.println("Enter user and password in teamcity.properties");
+        if(userPassword.isEmpty()){
+            System.out.println("TeamCity user or password is empty");
         }
     }
 

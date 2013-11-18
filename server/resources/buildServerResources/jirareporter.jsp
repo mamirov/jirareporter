@@ -40,7 +40,9 @@
             <span>Enable issue progressing:</span>
             <props:checkboxProperty name="enableIssueProgressing"/>
             <br>
-            <props:multilineProperty name="jiraWorkflow" rows="10" cols="58" linkTitle="Enter yout JIRA workflow"/>
+            <div id="jira.workflow">
+                <props:multilineProperty name="jiraWorkflow" rows="5" cols="58" linkTitle="Enter your JIRA workflow for issue progressing"/>
+            </div>
             <br>
             <span>Enable SSL connection:</span>
             <props:checkboxProperty name="enableSSLConnection"/>
@@ -66,22 +68,22 @@
 </l:settingsGroup>
 
 <script type="text/javascript">
-//    var checkBox = jQuery('#enableIssueProgressing');
-//    checkBox.change(function(){
-//        if(jQuery(this).prop("checked")){
-//            BS.Util.show('jira.workflow');
-//        }
-//        else{
-//            BS.Util.hide('jira.workflow');
-//        }
-//        BS.VisibilityHandlers.updateVisibility('mainContent');
-//    });
-//    if(checkBox.prop("checked")){
-//        BS.Util.show('jira.workflow');
-//    }
-//    else{
-//        BS.Util.hide('jira.workflow');
-//    }
+    var checkBox = jQuery('#enableIssueProgressing');
+    checkBox.change(function(){
+        if(jQuery(this).prop("checked")){
+            BS.Util.show('jira.workflow');
+        }
+        else{
+            BS.Util.hide('jira.workflow');
+        }
+        BS.VisibilityHandlers.updateVisibility('mainContent');
+    });
+    if(checkBox.prop("checked")){
+        BS.Util.show('jira.workflow');
+    }
+    else{
+        BS.Util.hide('jira.workflow');
+    }
     var select = jQuery('[name="prop:issueIdPlace"]');
     select.change(function(){
         switch (select.val()){
