@@ -1,7 +1,6 @@
 *.idea
 *.log
 *target/
-*.iml
 *.MF
 *out/
 *classes/
