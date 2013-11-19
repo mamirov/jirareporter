@@ -4,14 +4,14 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset1" name="My Fileset" removed="false">
-          <file>file://$MODULE_DIR$/src/META-INF/build-server-plugin-xsollacustomrunner.xml</file>
+          <file>file://$MODULE_DIR$/src/META-INF/build-server-plugin-jirareporter.xml</file>
         </fileset>
       </configuration>
     </facet>
     <facet type="web" name="Web">
       <configuration>
         <webroots>
-          <root url="file://$MODULE_DIR$/resources/buildServerResources" relative="/plugins/xsollacustomrunner" />
+          <root url="file://$MODULE_DIR$/resources/buildServerResources" relative="/plugins/jirareporter" />
         </webroots>
       </configuration>
     </facet>
@@ -29,7 +29,7 @@
     <orderEntry type="library" name="TeamCity Open API common" level="project" />
     <orderEntry type="library" name="TeamCity Third-Party common" level="project" />
     <orderEntry type="library" name="TeamCity Third-Party server" level="project" />
-    <orderEntry type="module" module-name="xsollacustomrunner-common" />
+    <orderEntry type="module" module-name="jirareporter-common" />
   </component>
 </module>
 

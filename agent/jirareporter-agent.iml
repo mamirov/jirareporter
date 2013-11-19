@@ -4,7 +4,7 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset1" name="My Fileset" removed="false">
-          <file>file://$MODULE_DIR$/src/META-INF/build-agent-plugin-xsollacustomrunner.xml</file>
+          <file>file://$MODULE_DIR$/src/META-INF/build-agent-plugin-jirareporter.xml</file>
         </fileset>
       </configuration>
     </facet>
@@ -19,7 +19,8 @@
     <orderEntry type="library" name="TeamCity Open API agent" level="project" />
     <orderEntry type="library" name="TeamCity Open API common" level="project" />
     <orderEntry type="library" name="TeamCity Third-Party common" level="project" />
-    <orderEntry type="module" module-name="xsollacustomrunner-common" />
+    <orderEntry type="module" module-name="jirareporter-common" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
 
