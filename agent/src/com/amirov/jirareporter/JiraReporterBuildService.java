@@ -23,10 +23,10 @@ public class JiraReporterBuildService extends BuildServiceAdapter{
         }
         RunnerParamsProvider.setProperty("buildName", getBuild().getBuildTypeName());
         if(RunnerParamsProvider.getIssueId().isEmpty() || RunnerParamsProvider.getIssueId() == null){
-            System.out.println("issue id is empty");
+            getLogger().message("Issue is not related");
         }
         else {
-            Reporter.report();
+            Reporter.report(getLogger());
             Reporter.progressIssue();
         }
         String osName = System.getProperty("os.name");

@@ -4,15 +4,16 @@ import com.amirov.jirareporter.jira.JIRAConfig;
 import com.amirov.jirareporter.teamcity.TeamCityXMLParser;
 import com.atlassian.jira.rest.client.NullProgressMonitor;
 import com.atlassian.jira.rest.client.domain.Comment;
+import jetbrains.buildServer.agent.BuildProgressLogger;
 
 import static com.amirov.jirareporter.jira.JIRAClient.*;
 
 public class Reporter {
 
-    public static void report(){
-        System.out.println("ISSUE: "+RunnerParamsProvider.getIssueId());
-        System.out.println("Title: "+getIssue().getSummary());
-        System.out.println("Description: "+getIssue().getDescription());
+    public static void report(BuildProgressLogger logger){
+        logger.message("ISSUE: "+RunnerParamsProvider.getIssueId()
+                +"\nTitle: "+getIssue().getSummary()
+                +"\nDescription: "+getIssue().getDescription());
         NullProgressMonitor pm = new NullProgressMonitor();
         getRestClient().getIssueClient().addComment(pm, getIssue().getCommentsUri(), Comment.valueOf(TeamCityXMLParser.getTestResultText()));
     }
