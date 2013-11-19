@@ -7,12 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="aec7f4fc-fd8a-4ba0-bdfb-222af45292ad" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jirareporter.iws" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jirareporter.iws" afterPath="$PROJECT_DIR$/jirareporter.iws" />
     </list>
     <ignored path="jirareporter.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="aec7f4fc-fd8a-4ba0-bdfb-222af45292ad" time="1384866852763" ignored="false" />
+    <file path="/Dummy.txt" changelist="aec7f4fc-fd8a-4ba0-bdfb-222af45292ad" time="1384867113549" ignored="false" />
     <file path="/JiraReporterRunType.java" changelist="aec7f4fc-fd8a-4ba0-bdfb-222af45292ad" time="1384327085900" ignored="false" />
     <file path="$PROJECT_DIR$/../teamcity-jira-reporter-bit/src/main/java/com/mamirov/jirareporter/jira/JIRAConfig.java" changelist="aec7f4fc-fd8a-4ba0-bdfb-222af45292ad" time="1384326933600" ignored="false" />
     <file path="$PROJECT_DIR$/../teamcity-jira-reporter-bit/src/main/java/com/mamirov/jirareporter/jira/JIRAClient.java" changelist="aec7f4fc-fd8a-4ba0-bdfb-222af45292ad" time="1384326938563" ignored="false" />
@@ -119,10 +118,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="13" selection-start="38" selection-end="38" vertical-scroll-proportion="0.07861635">
+            <state line="5" column="13" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jirareporter.ipr" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jirareporter.ipr">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jirareporter.iws" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jirareporter.iws">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -146,10 +163,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="build.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="46" selection-start="1095" selection-end="1095" vertical-scroll-proportion="0.0">
+            <state line="23" column="46" selection-start="1095" selection-end="1095" vertical-scroll-proportion="0.3616352">
               <folding />
             </state>
           </provider>
@@ -258,8 +275,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -270,6 +285,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -517,7 +534,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -537,7 +554,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299389" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2497332" sideWeight="0.67107946" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2497332" sideWeight="0.67107946" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286991" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -665,13 +682,6 @@
     <option name="showOnlyWarnings" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/teamcity-common.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="157" column="18" selection-start="7595" selection-end="7595" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jirareporter.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="13" selection-start="6" selection-end="13" vertical-scroll-proportion="0.0">
@@ -691,27 +701,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/agent/src/com/amirov/jirareporter/jira/JIRAConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="9" selection-start="1292" selection-end="1292" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="31" column="9" selection-start="1292" selection-end="1292" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/agent/src/com/amirov/jirareporter/teamcity/TeamCityXMLParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="13" selection-start="409" selection-end="409" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="15" column="13" selection-start="409" selection-end="409" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/agent/src/com/amirov/jirareporter/jira/JIRAClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="75" selection-start="1519" selection-end="1519" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="34" column="75" selection-start="1519" selection-end="1519" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/agent/src/com/amirov/jirareporter/Reporter.java">
@@ -724,13 +724,6 @@
     <entry file="file://$PROJECT_DIR$/teamcity-common.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="157" column="18" selection-start="7595" selection-end="7595" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/params.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="26" selection-start="875" selection-end="875" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -749,13 +742,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="46" selection-start="1095" selection-end="1095" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/agent/src/com/amirov/jirareporter/RunnerParamsProvider.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="25" selection-start="440" selection-end="440" vertical-scroll-proportion="0.0">
@@ -765,7 +751,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="38" selection-end="38" vertical-scroll-proportion="0.07861635">
+        <state line="5" column="13" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jirareporter.iws">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/params.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="26" selection-start="875" selection-end="875" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jirareporter.ipr">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="46" selection-start="1095" selection-end="1095" vertical-scroll-proportion="0.3616352">
           <folding />
         </state>
       </provider>
