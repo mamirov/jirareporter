@@ -4,7 +4,6 @@ package com.amirov.jirareporter.teamcity;
 import com.amirov.jirareporter.RunnerParamsProvider;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import sun.misc.BASE64Encoder;
@@ -20,7 +19,7 @@ public class TeamCityXMLParser {
     private static String BUILDS_XML_URL = "/httpAuth/app/rest/builds?locator=running:true,buildType:"+ BUILD_TYPE;
     private static String userPassword = RunnerParamsProvider.getTCUser()+":"+ RunnerParamsProvider.getTCPassword();
 
-    private static Node getNode(String xmlUrl, String tag, int num) {
+    private static NodeList getNodeList(String xmlUrl, String tag) {
         try{
             URL url = new URL(xmlUrl);
             validateTeamCityData();
@@ -32,8 +31,8 @@ public class TeamCityXMLParser {
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(new InputSource(uc.getInputStream()));
             doc.getDocumentElement().normalize();
-            NodeList nodeList = doc.getElementsByTagName(tag);
-            return nodeList.item(num);
+            return doc.getElementsByTagName(tag);
+//            return nodeList.item(num);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,7 +44,7 @@ public class TeamCityXMLParser {
     }
 
     private static NamedNodeMap parseXML(String xmlUrl, String tag){
-        return getNode(xmlUrl, tag, 0).getAttributes();
+        return getNodeList(xmlUrl, tag).item(0).getAttributes();
     }
 
     private static String getBuildAttribute(String attribute){
@@ -54,8 +53,12 @@ public class TeamCityXMLParser {
 
     public static String getIssue(){
         try{
-            Node issueTag = parseXML(SERVER_URL +"/httpAuth/app/rest/builds/id:"+getBuildId()+"/relatedIssues", "issue").getNamedItem("id");
-            return issueTag.getNodeValue();
+            NodeList issueList = getNodeList(SERVER_URL +"/httpAuth/app/rest/builds/id:"+getBuildId()+"/relatedIssues", "issue");
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i<issueList.getLength(); i++){
+                sb.append(issueList.item(i).getAttributes().getNamedItem("id").getNodeValue()+",");
+            }
+            return sb.toString();
         }
         catch (NullPointerException e){
             System.out.println("Issue is not related");
@@ -84,7 +87,7 @@ public class TeamCityXMLParser {
     }
 
     public static String getBuildTestsStatus(){
-        return getNode(SERVER_URL + getBuildHref(), "statusText", 0).getTextContent();
+        return getNodeList(SERVER_URL + getBuildHref(), "statusText").item(0).getTextContent();
     }
 
     public static String getBuildId(){
@@ -92,11 +95,11 @@ public class TeamCityXMLParser {
     }
 
     public static String getArtifactHref(){
-        return getNode(SERVER_URL + getBuildHref(), "artifacts", 0).getAttributes().getNamedItem("href").getNodeValue();
+        return getNodeList(SERVER_URL + getBuildHref(), "artifacts").item(0).getAttributes().getNamedItem("href").getNodeValue();
     }
 
     public static String getArtifactName(){
-        return getNode(SERVER_URL + getArtifactHref(), "file", 0).getAttributes().getNamedItem("name").getNodeValue();
+        return getNodeList(SERVER_URL + getArtifactHref(), "file").item(0).getAttributes().getNamedItem("name").getNodeValue();
     }
 
     private static void validateTeamCityData(){

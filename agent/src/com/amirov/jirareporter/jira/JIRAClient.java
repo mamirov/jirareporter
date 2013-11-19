@@ -1,5 +1,6 @@
 package com.amirov.jirareporter.jira;
 
+import com.amirov.jirareporter.Reporter;
 import com.amirov.jirareporter.RunnerParamsProvider;
 import com.amirov.jirareporter.teamcity.TeamCityXMLParser;
 import com.atlassian.jira.rest.client.JiraRestClient;
@@ -31,7 +32,7 @@ public class JIRAClient {
         NullProgressMonitor pm = new NullProgressMonitor();
         Issue issue = null;
         try {
-            issue = getRestClient().getIssueClient().getIssue(RunnerParamsProvider.getIssueId(), pm);
+            issue = getRestClient().getIssueClient().getIssue(Reporter.getIssueId(), pm);
         } catch (Exception e) {
             e.printStackTrace();
         }
