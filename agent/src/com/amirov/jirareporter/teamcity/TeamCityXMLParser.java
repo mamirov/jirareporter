@@ -16,7 +16,7 @@ import java.net.URLConnection;
 public class TeamCityXMLParser {
     private static String SERVER_URL = RunnerParamsProvider.getTCServerUrl();
     private static String BUILD_TYPE = RunnerParamsProvider.getBuildTypeId();
-    private static String BUILDS_XML_URL = "/httpAuth/app/rest/builds?locator=running:true,buildType:"+ BUILD_TYPE;
+    private static String BUILDS_XML_URL = "/httpAuth/app/rest/builds?locator=branch:default:any,running:true,buildType:"+ BUILD_TYPE;
     private static String userPassword = RunnerParamsProvider.getTCUser()+":"+ RunnerParamsProvider.getTCPassword();
 
     private static NodeList getNodeList(String xmlUrl, String tag) {
@@ -56,7 +56,13 @@ public class TeamCityXMLParser {
             NodeList issueList = getNodeList(SERVER_URL +"/httpAuth/app/rest/builds/id:"+getBuildId()+"/relatedIssues", "issue");
             StringBuilder sb = new StringBuilder();
             for(int i = 0; i<issueList.getLength(); i++){
-                sb.append(issueList.item(i).getAttributes().getNamedItem("id").getNodeValue()+",");
+                String issue = issueList.item(i).getAttributes().getNamedItem("id").getNodeValue();
+                if(sb.toString().contains(issue)){
+                    System.out.println("Issue is duplicated");
+                }
+                else {
+                    sb.append(issue+",");
+                }
             }
             return sb.toString();
         }
