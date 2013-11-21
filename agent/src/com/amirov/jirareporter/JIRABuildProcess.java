@@ -50,7 +50,6 @@ public class JIRABuildProcess implements BuildProcess{
                 Reporter.progressIssue();
             }
         }
-
     }
 
     @Override

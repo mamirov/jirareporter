@@ -15,8 +15,6 @@ import java.net.URLConnection;
 
 public class TeamCityXMLParser {
     private static String SERVER_URL = RunnerParamsProvider.getTCServerUrl();
-    private static String BUILD_TYPE = RunnerParamsProvider.getBuildTypeId();
-    private static String BUILDS_XML_URL = "/httpAuth/app/rest/builds?locator=branch:default:any,running:true,buildType:"+ BUILD_TYPE;
     private static String userPassword = RunnerParamsProvider.getTCUser()+":"+ RunnerParamsProvider.getTCPassword();
 
     private static NodeList getNodeList(String xmlUrl, String tag) {
@@ -39,12 +37,18 @@ public class TeamCityXMLParser {
         return null;
     }
 
-    private static NamedNodeMap getBuildData(){
-        return parseXML(SERVER_URL+BUILDS_XML_URL, "build");
+    private static NamedNodeMap parseXML(String xmlUrl, String tag){
+        RunnerParamsProvider.setProperty("build.xml.url", xmlUrl);
+        return getNodeList(xmlUrl, tag).item(0).getAttributes();
     }
 
-    private static NamedNodeMap parseXML(String xmlUrl, String tag){
-        return getNodeList(xmlUrl, tag).item(0).getAttributes();
+    public static String getBuildTypeId(){
+        return RunnerParamsProvider.getBuildTypeId();
+    }
+
+    private static NamedNodeMap getBuildData(){
+        String BUILDS_XML_URL = "/httpAuth/app/rest/builds?locator=branch:default:any,running:true,buildType:";
+        return parseXML(SERVER_URL+ BUILDS_XML_URL +getBuildTypeId(), "build");
     }
 
     private static String getBuildAttribute(String attribute){
@@ -80,9 +84,9 @@ public class TeamCityXMLParser {
         return getBuildAttribute("branchName");
     }
 
-    public static String getBuildTypeId(){
-        return getBuildAttribute("buildTypeId");
-    }
+//    public static String getBuildTypeId(){
+//        return getBuildAttribute("buildTypeId");
+//    }
 
     public static String getBuildHref(){
         return getBuildAttribute("href");
@@ -118,6 +122,6 @@ public class TeamCityXMLParser {
     }
 
     public static String getTestResultText(){
-        return getStatusBuild()+"\nBuild Finished\nResults:\n ["+RunnerParamsProvider.getBuildTypeName()+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+BUILD_TYPE+"]";
+        return getStatusBuild()+"\nBuild Finished\nResults:\n ["+RunnerParamsProvider.getBuildTypeName()+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+getBuildTypeId()+"]";
     }
 }
