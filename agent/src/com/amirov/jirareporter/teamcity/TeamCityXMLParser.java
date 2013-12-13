@@ -1,6 +1,7 @@
 package com.amirov.jirareporter.teamcity;
 
 
+import com.amirov.jirareporter.Reporter;
 import com.amirov.jirareporter.RunnerParamsProvider;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -43,7 +44,7 @@ public class TeamCityXMLParser {
     }
 
     public static String getBuildTypeId(){
-        return RunnerParamsProvider.getBuildTypeId();
+        return Reporter.getBuildtType();
     }
 
     private static NamedNodeMap getBuildData(){
@@ -122,6 +123,6 @@ public class TeamCityXMLParser {
     }
 
     public static String getTestResultText(){
-        return getStatusBuild()+"\nBuild Finished\nResults:\n ["+RunnerParamsProvider.getBuildTypeName()+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+getBuildTypeId()+"]";
+        return getStatusBuild()+"\nBuild Finished\nResults:\n ["+RunnerParamsProvider.getBuildTypeName()+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+ Reporter.getBuildtType()+"]";
     }
 }

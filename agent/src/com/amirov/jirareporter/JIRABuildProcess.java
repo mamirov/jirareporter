@@ -35,18 +35,19 @@ public class JIRABuildProcess implements BuildProcess{
         }
         RunnerParamsProvider.setProperty("buildName", myContext.getBuild().getBuildTypeName());
         String issueId = RunnerParamsProvider.getIssueId();
+        String buildTypeId = myContext.getBuild().getBuildTypeId();
         if(issueId == null || issueId.isEmpty()){
             logger.message("Issue is not related");
         }
         else {
             if(issueId.contains(",")){
                 for(String issue : issueId.split(",")){
-                    Reporter.report(logger, issue);
+                    Reporter.report(logger, issue, buildTypeId);
                     Reporter.progressIssue();
                 }
             }
             else {
-                Reporter.report(logger, issueId);
+                Reporter.report(logger, issueId, buildTypeId);
                 Reporter.progressIssue();
             }
         }

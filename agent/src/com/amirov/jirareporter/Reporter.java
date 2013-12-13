@@ -10,9 +10,11 @@ import static com.amirov.jirareporter.jira.JIRAClient.*;
 
 public class Reporter {
     private static String issueId;
+    private static String buildtType;
 
-    public static void report(BuildProgressLogger logger, String issue){
+    public static void report(BuildProgressLogger logger, String issue, String buildTypeId){
         issueId = issue;
+        buildtType = buildTypeId;
         logger.message("\nISSUE: "+issue
                 +"\nTitle: "+getIssue().getSummary()
                 +"\nDescription: "+getIssue().getDescription());
@@ -31,5 +33,8 @@ public class Reporter {
 
     public static String getIssueId(){
         return issueId;
+    }
+    public static String getBuildtType(){
+        return buildtType;
     }
 }
