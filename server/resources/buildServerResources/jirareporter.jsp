@@ -46,6 +46,8 @@
             <br>
             <span>Enable SSL connection:</span>
             <props:checkboxProperty name="enableSSLConnection"/>
+            <br>
+            <props:multilineProperty name="templateComment" rows="5" cols="58" linkTitle="Template comment for JIRA:"/>
         </td>
     </tr>
 </l:settingsGroup>

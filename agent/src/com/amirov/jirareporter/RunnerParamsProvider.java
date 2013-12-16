@@ -95,4 +95,8 @@ public  class RunnerParamsProvider {
     public static String getBuildTypeName(){
         return props.getProperty("buildName");
     }
+
+    public static String getTemplateComment(){
+        return props.getProperty("templateComment");
+    }
 }

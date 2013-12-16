@@ -13,6 +13,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Arrays;
+import java.util.List;
 
 public class TeamCityXMLParser {
     private static String SERVER_URL = RunnerParamsProvider.getTCServerUrl();
@@ -123,5 +125,41 @@ public class TeamCityXMLParser {
 
     public static String getTestResultText(){
         return getStatusBuild()+"\nBuild Finished\nResults:\n ["+RunnerParamsProvider.getBuildTypeName()+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+ Reporter.getBuildType()+"]";
+    }
+
+    public static String getTemplateValues(String param){
+        String value = "";
+        switch (param){
+            case "%status.build%":
+                value = getStatusBuild();
+                break;
+            case "%build.type.name%":
+                value = RunnerParamsProvider.getBuildTypeName();
+                break;
+            case "%tests.results%":
+                value = getBuildTestsStatus();
+                break;
+            case "%teamcity.server.url%":
+                value = SERVER_URL;
+                break;
+            case "%build.id%":
+                value = getBuildId();
+                break;
+            case "%build.type":
+                value = Reporter.getBuildType();
+                break;
+        }
+        return value;
+    }
+
+    public static void main(String [] args){
+        StringBuilder sb = new StringBuilder();
+        String template = RunnerParamsProvider.getTemplateComment();
+        List<String> templateParams = Arrays.asList("%status.build%", "%build.type.name%", "%tests.results%", "%teamcity.server.url%", "%build.id%", "%build.type%");
+        for(String param : templateParams){
+            if(template.contains(param)){
+                template.replace(param, getStatusBuild());
+            }
+        }
     }
 }
