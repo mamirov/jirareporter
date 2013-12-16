@@ -3,6 +3,7 @@ package com.amirov.jirareporter.teamcity;
 
 import com.amirov.jirareporter.Reporter;
 import com.amirov.jirareporter.RunnerParamsProvider;
+import com.google.common.collect.ImmutableMap;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
@@ -15,6 +16,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class TeamCityXMLParser {
     private static String SERVER_URL = RunnerParamsProvider.getTCServerUrl();
@@ -132,37 +134,22 @@ public class TeamCityXMLParser {
         }
     }
 
-    public static String getTemplateValue(String param){
-        String value = "";
-        switch (param){
-            case "*status.build*":
-                value = getStatusBuild();
-                break;
-            case "*build.type.name*":
-                value = RunnerParamsProvider.getBuildTypeName();
-                break;
-            case "*tests.results*":
-                value = getBuildTestsStatus();
-                break;
-            case "*teamcity.server.url*":
-                value = SERVER_URL;
-                break;
-            case "*build.id*":
-                value = getBuildId();
-                break;
-            case "*build.type*":
-                value = Reporter.getBuildType();
-                break;
-        }
-        return value;
+    public static ImmutableMap<String, String> getTemplateValue(){
+        return new ImmutableMap.Builder<String, String>()
+                .put("*status.build*", getStatusBuild())
+                .put("*build.type.name*", RunnerParamsProvider.getBuildTypeName())
+                .put("*tests.results*", getBuildTestsStatus())
+                .put("*teamcity.server.url*", SERVER_URL)
+                .put("*build.id*", getBuildId())
+                .put("*build.type*", Reporter.getBuildType())
+                .build();
     }
 
     public static String getTemplateComment(){
         String template = RunnerParamsProvider.getTemplateComment();
-        List<String> templateParams = Arrays.asList("*status.build*", "*build.type.name*", "*tests.results*", "*teamcity.server.url*", "*build.id*", "*build.type*");
-        for(String param : templateParams){
-            if(template.contains(param)){
-                template = template.replace(param, getTemplateValue(param));
+        for(Map.Entry<String, String> entry : getTemplateValue().entrySet()){
+            if(template.contains(entry.getKey())){
+                template = template.replace(entry.getKey(), entry.getValue());
             }
         }
         return template;
