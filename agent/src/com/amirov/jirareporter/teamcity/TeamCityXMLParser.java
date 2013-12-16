@@ -145,21 +145,21 @@ public class TeamCityXMLParser {
             case "%build.id%":
                 value = getBuildId();
                 break;
-            case "%build.type":
+            case "%build.type%":
                 value = Reporter.getBuildType();
                 break;
         }
         return value;
     }
 
-    public static void main(String [] args){
-        StringBuilder sb = new StringBuilder();
+    public static String getTemplateComment(){
         String template = RunnerParamsProvider.getTemplateComment();
         List<String> templateParams = Arrays.asList("%status.build%", "%build.type.name%", "%tests.results%", "%teamcity.server.url%", "%build.id%", "%build.type%");
         for(String param : templateParams){
             if(template.contains(param)){
-                template.replace(param, getStatusBuild());
+                template = template.replace(param, getTemplateValues(param));
             }
         }
+        return template;
     }
 }
