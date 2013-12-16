@@ -524,14 +524,14 @@
   </component>
   <component name="ProjectRunConfigurationManager">
     <configuration default="false" name="Run TeamCity server with plugin" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat (TeamCity Dist)" ALTERNATIVE_JRE_ENABLED="false" show_console_on_std_out="true" show_console_on_std_err="true">
-      <option name="COMMON_VM_ARGUMENTS" value="-Xmx512m -XX:MaxPermSize=270m -XX:+HeapDumpOnOutOfMemoryError  -Dlog4j.configuration=file:$USER_HOME$/Downloads/TeamCity2//conf/teamcity-server-log4j.xml -Dteamcity_logs=$USER_HOME$/Downloads/TeamCity2//logs/ -DTC.res.disableAll=true -Dteamcity.development.shadowCopyClasses=true" />
+      <option name="COMMON_VM_ARGUMENTS" value="-Xmx512m -XX:MaxPermSize=270m -XX:+HeapDumpOnOutOfMemoryError  -Dlog4j.configuration=file:%IDEA_RUN:TOMCAT_HOME%//conf/teamcity-server-log4j.xml -Dteamcity_logs=%IDEA_RUN:TOMCAT_HOME%//logs/ -DTC.res.disableAll=true -Dteamcity.development.shadowCopyClasses=true" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment />
       <server-settings>
         <option name="BASE_DIRECTORY_NAME" value="Unnamed_jirareporter" />
         <option name="DEPLOY_TOMCAT_APPS" value="true" />
       </server-settings>
-      <log_file path="$USER_HOME$/Downloads/TeamCity2//logs/teamcity-server.log" checked="true" skipped="true" show_all="false" alias="teamcity-server.log" />
+      <log_file path="%IDEA_RUN:TOMCAT_HOME%//logs/teamcity-server.log" checked="true" skipped="true" show_all="false" alias="teamcity-server.log" />
       <predefined_log_file id="Tomcat" enabled="true" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <RunnerSettings RunnerId="Cover" />
@@ -637,58 +637,58 @@
     </library>
     <library name="TeamCity Open API agent">
       <CLASSES>
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/devPackage/agent-api.jar!/" />
+        <root url="jar://$TeamCityDistribution$/devPackage/agent-api.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/devPackage/javadoc/openApi-help.jar!/" />
+        <root url="jar://$TeamCityDistribution$/devPackage/javadoc/openApi-help.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/devPackage/src/openApi-source.jar!/" />
+        <root url="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/" />
       </SOURCES>
     </library>
     <library name="TeamCity Open API common">
       <CLASSES>
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/devPackage/common-api.jar!/" />
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/devPackage/runtime/runtime-util.jar!/" />
+        <root url="jar://$TeamCityDistribution$/devPackage/common-api.jar!/" />
+        <root url="jar://$TeamCityDistribution$/devPackage/runtime/runtime-util.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/devPackage/javadoc/openApi-help.jar!/" />
+        <root url="jar://$TeamCityDistribution$/devPackage/javadoc/openApi-help.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/devPackage/src/openApi-source.jar!/" />
+        <root url="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/" />
       </SOURCES>
     </library>
     <library name="TeamCity Open API server">
       <CLASSES>
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/devPackage/server-api.jar!/" />
+        <root url="jar://$TeamCityDistribution$/devPackage/server-api.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/devPackage/javadoc/openApi-help.jar!/" />
+        <root url="jar://$TeamCityDistribution$/devPackage/javadoc/openApi-help.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/devPackage/src/openApi-source.jar!/" />
+        <root url="jar://$TeamCityDistribution$/devPackage/src/openApi-source.jar!/" />
       </SOURCES>
     </library>
     <library name="TeamCity Third-Party common">
       <CLASSES>
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/webapps/ROOT/WEB-INF/lib/annotations.jar!/" />
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/webapps/ROOT/WEB-INF/lib/spring.jar!/" />
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/webapps/ROOT/WEB-INF/lib/openapi.jar!/" />
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/webapps/ROOT/WEB-INF/lib/util.jar!/" />
+        <root url="jar://$TeamCityDistribution$/webapps/ROOT/WEB-INF/lib/annotations.jar!/" />
+        <root url="jar://$TeamCityDistribution$/webapps/ROOT/WEB-INF/lib/spring.jar!/" />
+        <root url="jar://$TeamCityDistribution$/webapps/ROOT/WEB-INF/lib/openapi.jar!/" />
+        <root url="jar://$TeamCityDistribution$/webapps/ROOT/WEB-INF/lib/util.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
     </library>
     <library name="TeamCity Third-Party server">
       <CLASSES>
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/webapps/ROOT/WEB-INF/lib/spring-webmvc.jar!/" />
+        <root url="jar://$TeamCityDistribution$/webapps/ROOT/WEB-INF/lib/spring-webmvc.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
     </library>
     <library name="Tomcat">
       <CLASSES>
-        <root url="jar://$USER_HOME$/Downloads/TeamCity2/lib/servlet-api.jar!/" />
+        <root url="jar://$TeamCityDistribution$/lib/servlet-api.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />

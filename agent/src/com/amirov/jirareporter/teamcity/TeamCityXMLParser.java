@@ -44,7 +44,7 @@ public class TeamCityXMLParser {
     }
 
     public static String getBuildTypeId(){
-        return Reporter.getBuildtType();
+        return Reporter.getBuildType();
     }
 
     private static NamedNodeMap getBuildData(){
@@ -57,9 +57,9 @@ public class TeamCityXMLParser {
     }
 
     public static String getIssue(){
+        StringBuilder sb = new StringBuilder();
         try{
             NodeList issueList = getNodeList(SERVER_URL +"/httpAuth/app/rest/builds/id:"+getBuildId()+"/relatedIssues", "issue");
-            StringBuilder sb = new StringBuilder();
             for(int i = 0; i<issueList.getLength(); i++){
                 String issue = issueList.item(i).getAttributes().getNamedItem("id").getNodeValue();
                 if(sb.toString().contains(issue)){
@@ -69,12 +69,11 @@ public class TeamCityXMLParser {
                     sb.append(issue+",");
                 }
             }
-            return sb.toString();
         }
         catch (NullPointerException e){
             System.out.println("Issue is not related");
         }
-        return "";
+        return sb.toString();
     }
 
     public static String getStatusBuild(){
@@ -123,6 +122,6 @@ public class TeamCityXMLParser {
     }
 
     public static String getTestResultText(){
-        return getStatusBuild()+"\nBuild Finished\nResults:\n ["+RunnerParamsProvider.getBuildTypeName()+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+ Reporter.getBuildtType()+"]";
+        return getStatusBuild()+"\nBuild Finished\nResults:\n ["+RunnerParamsProvider.getBuildTypeName()+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+ Reporter.getBuildType()+"]";
     }
 }
