@@ -99,4 +99,8 @@ public  class RunnerParamsProvider {
     public static String getTemplateComment(){
         return props.getProperty("templateComment");
     }
+
+    public static String enableCommentTemplate(){
+        return props.getProperty("enableTemplateComment");
+    }
 }

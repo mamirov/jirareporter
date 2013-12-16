@@ -124,28 +124,33 @@ public class TeamCityXMLParser {
     }
 
     public static String getTestResultText(){
-        return getStatusBuild()+"\nBuild Finished\nResults:\n ["+RunnerParamsProvider.getBuildTypeName()+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+ Reporter.getBuildType()+"]";
+        if(RunnerParamsProvider.enableCommentTemplate().equals("true")){
+            return getTemplateComment();
+        }
+        else {
+            return getStatusBuild()+"\nBuild Finished\nResults:\n ["+RunnerParamsProvider.getBuildTypeName()+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+ Reporter.getBuildType()+"]";
+        }
     }
 
-    public static String getTemplateValues(String param){
+    public static String getTemplateValue(String param){
         String value = "";
         switch (param){
-            case "%status.build%":
+            case "*status.build*":
                 value = getStatusBuild();
                 break;
-            case "%build.type.name%":
+            case "*build.type.name*":
                 value = RunnerParamsProvider.getBuildTypeName();
                 break;
-            case "%tests.results%":
+            case "*tests.results*":
                 value = getBuildTestsStatus();
                 break;
-            case "%teamcity.server.url%":
+            case "*teamcity.server.url*":
                 value = SERVER_URL;
                 break;
-            case "%build.id%":
+            case "*build.id*":
                 value = getBuildId();
                 break;
-            case "%build.type%":
+            case "*build.type*":
                 value = Reporter.getBuildType();
                 break;
         }
@@ -154,10 +159,10 @@ public class TeamCityXMLParser {
 
     public static String getTemplateComment(){
         String template = RunnerParamsProvider.getTemplateComment();
-        List<String> templateParams = Arrays.asList("%status.build%", "%build.type.name%", "%tests.results%", "%teamcity.server.url%", "%build.id%", "%build.type%");
+        List<String> templateParams = Arrays.asList("*status.build*", "*build.type.name*", "*tests.results*", "*teamcity.server.url*", "*build.id*", "*build.type*");
         for(String param : templateParams){
             if(template.contains(param)){
-                template = template.replace(param, getTemplateValues(param));
+                template = template.replace(param, getTemplateValue(param));
             }
         }
         return template;

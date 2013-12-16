@@ -33,6 +33,9 @@ public class JIRABuildProcess implements BuildProcess{
         if(runnerParams.get("enableSSLConnection") == null){
             RunnerParamsProvider.setProperty("enableSSLConnection", "false");
         }
+        if(runnerParams.get("enableTemplateComment") == null){
+            RunnerParamsProvider.setProperty("enableTemplateComment", "false");
+        }
         RunnerParamsProvider.setProperty("buildName", myContext.getBuild().getBuildTypeName());
         String issueId = RunnerParamsProvider.getIssueId();
         String buildTypeId = myContext.getBuild().getBuildTypeId();
