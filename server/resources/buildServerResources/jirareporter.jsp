@@ -46,6 +46,13 @@
             <br>
             <span>Enable SSL connection:</span>
             <props:checkboxProperty name="enableSSLConnection"/>
+            <br>
+            <span>Enable comment template for JIRA</span>
+            <props:checkboxProperty name="enableTemplateComment"/>
+            <br>
+            <div id="templateJiraComment">
+                <props:multilineProperty name="templateComment" rows="5" cols="58" linkTitle="Template comment for JIRA:"/>
+            </div>
         </td>
     </tr>
 </l:settingsGroup>
@@ -83,6 +90,22 @@
     }
     else{
         BS.Util.hide('jira.workflow');
+    }
+    var tplComment = jQuery('#enableTemplateComment');
+    tplComment.change(function(){
+        if(jQuery(this).prop("checked")){
+            BS.Util.show('templateJiraComment');
+        }
+        else{
+            BS.Util.hide('templateJiraComment');
+        }
+        BS.VisibilityHandlers.updateVisibility('mainContent');
+    });
+    if(tplComment.prop("checked")){
+        BS.Util.show('templateJiraComment');
+    }
+    else{
+        BS.Util.hide('templateJiraComment');
     }
     var select = jQuery('[name="prop:issueIdPlace"]');
     select.change(function(){

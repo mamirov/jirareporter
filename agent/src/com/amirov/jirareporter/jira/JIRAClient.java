@@ -52,7 +52,8 @@ public class JIRAClient {
     }
 
     public static TransitionInput getTransitionInput(String transitionName){
-        return new TransitionInput(getTransition(transitionName).getId(), Comment.valueOf(TeamCityXMLParser.getTestResultText()));
+        TeamCityXMLParser parser = new TeamCityXMLParser();
+        return new TransitionInput(getTransition(transitionName).getId(), Comment.valueOf(parser.getTestResultText()));
     }
 
     private static Transition getTransitionByName(Iterable<Transition> transitions, String transitionName) {

@@ -1,8 +1,8 @@
 package com.amirov.jirareporter.teamcity;
 
 
-import com.amirov.jirareporter.Reporter;
 import com.amirov.jirareporter.RunnerParamsProvider;
+import com.google.common.collect.ImmutableMap;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
@@ -13,12 +13,20 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Map;
 
 public class TeamCityXMLParser {
-    private static String SERVER_URL = RunnerParamsProvider.getTCServerUrl();
-    private static String userPassword = RunnerParamsProvider.getTCUser()+":"+ RunnerParamsProvider.getTCPassword();
+    private String SERVER_URL = RunnerParamsProvider.getTCServerUrl();
+    private String userPassword = RunnerParamsProvider.getTCUser()+":"+ RunnerParamsProvider.getTCPassword();
+    private NamedNodeMap buildData;
+    public String buildTypeId = RunnerParamsProvider.getBuildTypeId();
+    
+    public TeamCityXMLParser(){
+        String BUILDS_XML_URL = "/httpAuth/app/rest/builds?locator=branch:default:any,running:true,buildType:";
+        buildData = parseXML(SERVER_URL+ BUILDS_XML_URL +buildTypeId, "build");
+    }
 
-    private static NodeList getNodeList(String xmlUrl, String tag) {
+    private NodeList getNodeList(String xmlUrl, String tag) {
         try{
             URL url = new URL(xmlUrl);
             validateTeamCityData();
@@ -38,25 +46,16 @@ public class TeamCityXMLParser {
         return null;
     }
 
-    private static NamedNodeMap parseXML(String xmlUrl, String tag){
+    private NamedNodeMap parseXML(String xmlUrl, String tag){
         RunnerParamsProvider.setProperty("build.xml.url", xmlUrl);
         return getNodeList(xmlUrl, tag).item(0).getAttributes();
     }
 
-    public static String getBuildTypeId(){
-        return Reporter.getBuildType();
+    private String getBuildAttribute(String attribute){
+        return buildData.getNamedItem(attribute).getNodeValue();
     }
 
-    private static NamedNodeMap getBuildData(){
-        String BUILDS_XML_URL = "/httpAuth/app/rest/builds?locator=branch:default:any,running:true,buildType:";
-        return parseXML(SERVER_URL+ BUILDS_XML_URL +getBuildTypeId(), "build");
-    }
-
-    private static String getBuildAttribute(String attribute){
-        return getBuildData().getNamedItem(attribute).getNodeValue();
-    }
-
-    public static String getIssue(){
+    public String getIssue(){
         StringBuilder sb = new StringBuilder();
         try{
             NodeList issueList = getNodeList(SERVER_URL +"/httpAuth/app/rest/builds/id:"+getBuildId()+"/relatedIssues", "issue");
@@ -76,43 +75,43 @@ public class TeamCityXMLParser {
         return sb.toString();
     }
 
-    public static String getStatusBuild(){
+    public String getStatusBuild(){
         return getBuildAttribute("status");
     }
 
-    public static String getBranchName (){
+    public String getBranchName (){
         return getBuildAttribute("branchName");
     }
 
-//    public static String getBuildTypeId(){
+//    public String getBuildTypeId(){
 //        return getBuildAttribute("buildTypeId");
 //    }
 
-    public static String getBuildHref(){
+    public String getBuildHref(){
         return getBuildAttribute("href");
     }
 
-    public static  String getWebUrl(){
+    public  String getWebUrl(){
         return getBuildAttribute("webUrl");
     }
 
-    public static String getBuildTestsStatus(){
+    public String getBuildTestsStatus(){
         return getNodeList(SERVER_URL + getBuildHref(), "statusText").item(0).getTextContent();
     }
 
-    public static String getBuildId(){
+    public String getBuildId(){
         return getBuildAttribute("id");
     }
 
-    public static String getArtifactHref(){
+    public String getArtifactHref(){
         return getNodeList(SERVER_URL + getBuildHref(), "artifacts").item(0).getAttributes().getNamedItem("href").getNodeValue();
     }
 
-    public static String getArtifactName(){
+    public String getArtifactName(){
         return getNodeList(SERVER_URL + getArtifactHref(), "file").item(0).getAttributes().getNamedItem("name").getNodeValue();
     }
 
-    private static void validateTeamCityData(){
+    private void validateTeamCityData(){
         if(SERVER_URL.isEmpty()){
             System.out.println("TeamCity server url is empty");
         }
@@ -121,7 +120,33 @@ public class TeamCityXMLParser {
         }
     }
 
-    public static String getTestResultText(){
-        return getStatusBuild()+"\nBuild Finished\nResults:\n ["+RunnerParamsProvider.getBuildTypeName()+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+ Reporter.getBuildType()+"]";
+    public String getTestResultText(){
+        if(RunnerParamsProvider.enableCommentTemplate().equals("true")){
+            return getTemplateComment();
+        }
+        else {
+            return getStatusBuild()+"\nBuild Finished\nResults:\n ["+RunnerParamsProvider.getBuildTypeName()+" : "+getBuildTestsStatus()+"|"+SERVER_URL +"/viewLog.html?buildId="+getBuildId()+"&tab=buildResultsDiv&buildTypeId="+ buildTypeId+"]";
+        }
+    }
+
+    public ImmutableMap<String, String> getTemplateValue(){
+        return new ImmutableMap.Builder<String, String>()
+                .put("*status.build*", getStatusBuild())
+                .put("*build.type.name*", RunnerParamsProvider.getBuildTypeName())
+                .put("*tests.results*", getBuildTestsStatus())
+                .put("*teamcity.server.url*", SERVER_URL)
+                .put("*build.id*", getBuildId())
+                .put("*build.type*", buildTypeId)
+                .build();
+    }
+
+    public String getTemplateComment(){
+        String template = RunnerParamsProvider.getTemplateComment();
+        for(Map.Entry<String, String> entry : getTemplateValue().entrySet()){
+            if(template.contains(entry.getKey())){
+                template = template.replace(entry.getKey(), entry.getValue());
+            }
+        }
+        return template;
     }
 }
