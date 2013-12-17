@@ -22,11 +22,14 @@ public class JIRABuildProcess implements BuildProcess{
 
     @Override
     public void start() throws RunBuildException {
-        logger = myBuild.getBuildLogger();
         Map<String, String> runnerParams = new HashMap<String, String>(myContext.getRunnerParameters());
         for(Map.Entry<String, String> entry : runnerParams.entrySet()){
             RunnerParamsProvider.setProperty(entry.getKey(), entry.getValue());
         }
+        RunnerParamsProvider.setProperty("build.type.id", myContext.getBuild().getBuildTypeId());
+        logger = myBuild.getBuildLogger();
+        Reporter reporter = new Reporter(logger);
+        String issueId = RunnerParamsProvider.getIssueId();
         if(runnerParams.get("enableIssueProgressing") == null){
             RunnerParamsProvider.setProperty("enableIssueProgressing", "false");
         }
@@ -37,21 +40,19 @@ public class JIRABuildProcess implements BuildProcess{
             RunnerParamsProvider.setProperty("enableTemplateComment", "false");
         }
         RunnerParamsProvider.setProperty("buildName", myContext.getBuild().getBuildTypeName());
-        String issueId = RunnerParamsProvider.getIssueId();
-        String buildTypeId = myContext.getBuild().getBuildTypeId();
         if(issueId == null || issueId.isEmpty()){
             logger.message("Issue is not related");
         }
         else {
             if(issueId.contains(",")){
                 for(String issue : issueId.split(",")){
-                    Reporter.report(logger, issue, buildTypeId);
-                    Reporter.progressIssue();
+                    reporter.report(issue);
+                    reporter.progressIssue();
                 }
             }
             else {
-                Reporter.report(logger, issueId, buildTypeId);
-                Reporter.progressIssue();
+                reporter.report(issueId);
+                reporter.progressIssue();
             }
         }
     }

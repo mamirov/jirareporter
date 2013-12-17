@@ -51,7 +51,7 @@ public  class RunnerParamsProvider {
     }
 
     public static String getBuildTypeId(){
-        return props.getProperty("teamcity.buildType.id");
+        return props.getProperty("build.type.id");
     }
 
     public static String getIssueIdPlace(){
@@ -60,13 +60,14 @@ public  class RunnerParamsProvider {
 
     public static String getIssueId(){
         String issueId = "";
-        String s = getIssueIdPlace();
-        if (s.equals("teamcity")) {
-            String issueTC = TeamCityXMLParser.getIssue();
+        String issueIdPlace = getIssueIdPlace();
+        if (issueIdPlace.equals("teamcity")) {
+            TeamCityXMLParser parser = new TeamCityXMLParser();
+            String issueTC = parser.getIssue();
             setProperty("issueId", issueTC);
             issueId = issueTC;
 
-        } else if (s.equals("custom")) {
+        } else if (issueIdPlace.equals("custom")) {
             issueId = props.getProperty("issueId");
         }
         return issueId;
