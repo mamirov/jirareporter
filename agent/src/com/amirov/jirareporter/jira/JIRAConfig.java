@@ -23,8 +23,8 @@ public class JIRAConfig {
     }
 
     public static Map<String, String> prepareJiraWorkflow(String buildStatus){
-        Map<String, String> successWorkflowMap = new HashMap<>();
-        Map<String, String> failureWorkflowMap = new HashMap<>();
+        Map<String, String> successWorkflowMap = new HashMap<String, String>();
+        Map<String, String> failureWorkflowMap = new HashMap<String, String>();
         String [] statusCont = RunnerParamsProvider.getJiraWorkFlow().split(";");
         for(String status : statusCont){
             processWorkflow("SUCCESS", status, successWorkflowMap);

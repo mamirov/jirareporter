@@ -23,7 +23,7 @@ public class JIRABuildProcess implements BuildProcess{
     @Override
     public void start() throws RunBuildException {
         logger = myBuild.getBuildLogger();
-        Map<String, String> runnerParams = new HashMap<>(myContext.getRunnerParameters());
+        Map<String, String> runnerParams = new HashMap<String, String>(myContext.getRunnerParameters());
         for(Map.Entry<String, String> entry : runnerParams.entrySet()){
             RunnerParamsProvider.setProperty(entry.getKey(), entry.getValue());
         }

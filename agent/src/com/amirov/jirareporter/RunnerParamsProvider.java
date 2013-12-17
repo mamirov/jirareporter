@@ -60,14 +60,14 @@ public  class RunnerParamsProvider {
 
     public static String getIssueId(){
         String issueId = "";
-        switch (getIssueIdPlace()){
-            case "teamcity":
-                String issueTC = TeamCityXMLParser.getIssue();
-                setProperty("issueId", issueTC);
-                issueId = issueTC;
-                break;
-            case "custom":
-                issueId = props.getProperty("issueId");
+        String s = getIssueIdPlace();
+        if (s.equals("teamcity")) {
+            String issueTC = TeamCityXMLParser.getIssue();
+            setProperty("issueId", issueTC);
+            issueId = issueTC;
+
+        } else if (s.equals("custom")) {
+            issueId = props.getProperty("issueId");
         }
         return issueId;
     }
