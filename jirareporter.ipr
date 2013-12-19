@@ -89,6 +89,12 @@
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="1.6">
+      <module name="jirareporter-agent" target="1.6" />
+      <module name="jirareporter-common" target="1.6" />
+      <module name="jirareporter-server" target="1.6" />
+      <module name="root" target="1.6" />
+    </bytecodeTargetLevel>
   </component>
   <component name="CopyrightManager" default="">
     <copyright>
@@ -523,7 +529,7 @@
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ProjectRunConfigurationManager">
-    <configuration default="false" name="Run TeamCity server with plugin" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat (TeamCity Dist)" ALTERNATIVE_JRE_ENABLED="false" show_console_on_std_out="true" show_console_on_std_err="true">
+    <configuration default="false" name="Run TeamCity server with plugin" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat (TeamCity Dist)" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="" show_console_on_std_out="true" show_console_on_std_err="true">
       <option name="COMMON_VM_ARGUMENTS" value="-Xmx512m -XX:MaxPermSize=270m -XX:+HeapDumpOnOutOfMemoryError  -Dlog4j.configuration=file:%IDEA_RUN:TOMCAT_HOME%//conf/teamcity-server-log4j.xml -Dteamcity_logs=%IDEA_RUN:TOMCAT_HOME%//logs/ -DTC.res.disableAll=true -Dteamcity.development.shadowCopyClasses=true" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment />
