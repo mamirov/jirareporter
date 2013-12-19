@@ -15,11 +15,11 @@
         <td>
             <span>Server URL:</span>
             <br>
-            <props:textProperty name="jiraServerUrl" id="jiraServerURL" className="longField"/>
+            <props:textProperty name="jiraServerUrl" className="longField"/>
             <br>
             <span>User:</span>
             <br>
-            <props:textProperty name="jiraUser" id="jiraUser"/>
+            <props:textProperty name="jiraUser" />
             <br>
             <span>Password:</span>
             <br>
@@ -34,7 +34,7 @@
             <div id="jira.issue.id" style="display: none">
                 <span>ISSUE ID:</span>
                 <br>
-                <props:textProperty name="issueId" id="issueId"/>
+                <props:textProperty name="issueId" />
             </div>
             <br>
             <span>Enable issue progressing:</span>
@@ -61,11 +61,11 @@
         <td>
             <span>Server URL:</span>
             <br>
-            <props:textProperty name="tcServerUrl" id="tcServerUrl" className="longField"/>
+            <props:textProperty name="tcServerUrl" className="longField"/>
             <br>
             <span>User:</span>
             <br>
-            <props:textProperty name="tcUser" id="tcUser"/>
+            <props:textProperty name="tcUser" />
             <br>
             <span>Password:</span>
             <br>
