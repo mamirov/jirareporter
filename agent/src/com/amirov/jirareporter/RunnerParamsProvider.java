@@ -30,7 +30,11 @@ public  class RunnerParamsProvider {
     }
 
     public static String getJiraServerUrl(){
-        return props.getProperty("jiraServerUrl");
+        String jiraServerUrl = props.getProperty("jiraServerUrl");
+        if (jiraServerUrl.endsWith("/")) {
+            jiraServerUrl = jiraServerUrl.substring(0, jiraServerUrl.length() - 1);
+        }
+        return jiraServerUrl;
     }
 
     public static String getJiraUser(){
@@ -78,7 +82,11 @@ public  class RunnerParamsProvider {
     }
 
     public static String getTCServerUrl(){
-        return props.getProperty("tcServerUrl");
+        String tcServerUrl = props.getProperty("tcServerUrl");
+        if (tcServerUrl.endsWith("/")) {
+            tcServerUrl = tcServerUrl.substring(0, tcServerUrl.length() - 1);
+        }
+        return tcServerUrl;
     }
 
     public static String getTCUser(){
