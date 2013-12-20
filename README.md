@@ -1,3 +1,7 @@
+Wiki:
+
+https://github.com/mamirov/jirareporter/wiki/TeamCity-JIRA-Reporter-(ENG)
+
 #### version 0.2 ####
 
 Features:
