@@ -29,7 +29,6 @@ public class TeamCityXMLParser {
     private NodeList getNodeList(String xmlUrl, String tag) {
         try{
             URL url = new URL(xmlUrl);
-            validateTeamCityData();
             String encoding = new BASE64Encoder().encode(userPassword.getBytes());
             URLConnection uc = url.openConnection();
             uc.setRequestProperty("Authorization","Basic " + encoding);
@@ -83,10 +82,6 @@ public class TeamCityXMLParser {
         return getBuildAttribute("branchName");
     }
 
-//    public String getBuildTypeId(){
-//        return getBuildAttribute("buildTypeId");
-//    }
-
     public String getBuildHref(){
         return getBuildAttribute("href");
     }
@@ -109,15 +104,6 @@ public class TeamCityXMLParser {
 
     public String getArtifactName(){
         return getNodeList(SERVER_URL + getArtifactHref(), "file").item(0).getAttributes().getNamedItem("name").getNodeValue();
-    }
-
-    private void validateTeamCityData(){
-        if(SERVER_URL.isEmpty()){
-            System.out.println("TeamCity server url is empty");
-        }
-        if(userPassword.isEmpty()){
-            System.out.println("TeamCity user or password is empty");
-        }
     }
 
     public String getTestResultText(){
