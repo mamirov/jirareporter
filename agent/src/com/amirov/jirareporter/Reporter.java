@@ -31,7 +31,10 @@ public class Reporter {
         NullProgressMonitor pm = new NullProgressMonitor();
         if(RunnerParamsProvider.progressIssueIsEnable() == null){}
         else if(RunnerParamsProvider.progressIssueIsEnable().equals("true")){
-            getRestClient().getIssueClient().transition(getIssue().getTransitionsUri(), getTransitionInput(JIRAConfig.prepareJiraWorkflow(parser.getStatusBuild()).get(getIssueStatus())), pm);
+            String transitionName = JIRAConfig.prepareJiraWorkflow(parser.getStatusBuild()).get(getIssueStatus());
+            if (transitionName != null) {
+                getRestClient().getIssueClient().transition(getIssue().getTransitionsUri(), getTransitionInput(transitionName), pm);
+            }
         }
     }
 
